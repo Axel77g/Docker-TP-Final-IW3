@@ -1,0 +1,4 @@
+FROM php:fpm
+
+
+EXPOSE 9000

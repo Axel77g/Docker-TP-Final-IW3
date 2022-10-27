@@ -1,6 +1,8 @@
 services:
   php:
-    build: docker/PHP/Dockerfile
+    build:
+      context: .
+      dockerfile: Docker/PHP/Dockerfile
     ports:
       - "9000:9000"
   db:
@@ -18,8 +20,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./volumes/www:/var/www/html
-      - ./volumes/nginx:/etc/nginx
+      - ./volumes/www:/var/www
+      - ./volumes/nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php
       - db

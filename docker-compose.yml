@@ -1,0 +1,27 @@
+services:
+  php:
+    build: docker/PHP/Dockerfile
+    ports:
+      - "9000:9000"
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./volumes/www:/var/www/html
+      - ./volumes/nginx:/etc/nginx
+    depends_on:
+      - php
+      - db
+volumes:
+  db_data:

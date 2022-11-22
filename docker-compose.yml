@@ -3,18 +3,25 @@ services:
     build:
       context: .
       dockerfile: Docker/PHP/Dockerfile
+    volumes:
+      - ./volumes/www:/var/www
     ports:
       - "9000:9000"
+    command: /bin/bash setup.sh
+    depends_on:
+      - db
   db:
     image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
   nginx:
     image: nginx:latest
     ports:

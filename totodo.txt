@@ -1,0 +1,9 @@
+- 2 nginx
+- 2 service php
+    docker file
+    lancer les comande 
+- 1 db
+
+
+
+

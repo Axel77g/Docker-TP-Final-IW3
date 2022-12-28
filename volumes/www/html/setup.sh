@@ -6,9 +6,13 @@ composer install
 
 npm run build
 
-php artisan migrate:fresh --seed
+chmod 777 -R ./*
 
-chmod 777 -r ./*
+php artisan key:generate
+
+php artisan config:cache
+
+php artisan migrate:fresh --seed
 
 php-fpm
 

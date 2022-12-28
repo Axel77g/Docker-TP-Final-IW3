@@ -12,6 +12,21 @@ services:
       - bridge-network
     depends_on:
       - db
+  
+  php2:
+    build:
+      context: .
+      dockerfile: Docker/PHP/Dockerfile
+    volumes:
+      - ./volumes/www2:/var/www
+    ports:
+      - "9009:9000"
+    command: /bin/bash setup.sh
+    networks:
+      - bridge-network
+    depends_on:
+      - db
+  
   db:
     image: mysql:5.7
     platform: linux/amd64
@@ -44,10 +59,10 @@ services:
     ports:
       - "3000:80"
     volumes:
-      - ./volumes/www:/var/www
-      - ./volumes/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./volumes/www2:/var/www
+      - ./volumes/nginx/default2.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - php
+      - php2
       - db
     networks:
       - bridge-network

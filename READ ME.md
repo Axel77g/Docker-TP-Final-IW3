@@ -16,4 +16,6 @@ Pour lancer les deux serveurs il suffit de lancer la commande
 docker compose up
 ```
 
+L'installation des paquets et la mise a jours de la db se fait automatiquement
+
 Ensuite rendez-vous a l'addresse `http://localhost` pour accéder au serveur 1 et `http://localhost:3000` pour accéder au serveur 2

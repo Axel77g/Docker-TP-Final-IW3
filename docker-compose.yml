@@ -12,7 +12,7 @@ services:
       - bridge-network
     depends_on:
       - db
-  
+
   php2:
     build:
       context: .
@@ -20,13 +20,13 @@ services:
     volumes:
       - ./volumes/www2:/var/www
     ports:
-      - "9009:9000"
+      - "9001:9000"
     command: /bin/bash setup.sh
     networks:
       - bridge-network
     depends_on:
       - db
-  
+
   db:
     image: mysql:5.7
     platform: linux/amd64
@@ -63,6 +63,17 @@ services:
       - ./volumes/nginx/default2.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php2
+      - db
+    networks:
+      - bridge-network
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+    ports:
+      - "8080:80"
+    depends_on:
       - db
     networks:
       - bridge-network

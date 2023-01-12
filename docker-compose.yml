@@ -8,8 +8,6 @@ services:
     ports:
       - "9000:9000"
     command: /bin/bash setup.sh
-    networks:
-      - bridge-network
     depends_on:
       - db
 
@@ -22,8 +20,6 @@ services:
     ports:
       - "9001:9000"
     command: /bin/bash setup.sh
-    networks:
-      - bridge-network
     depends_on:
       - db
 
@@ -40,8 +36,6 @@ services:
       MYSQL_DATABASE: laravel
       MYSQL_USER: laravel
       MYSQL_PASSWORD: laravel
-    networks:
-      - bridge-network
   nginx:
     image: nginx:latest
     ports:
@@ -52,8 +46,6 @@ services:
     depends_on:
       - php
       - db
-    networks:
-      - bridge-network
   nginx2:
     image: nginx:latest
     ports:
@@ -64,8 +56,6 @@ services:
     depends_on:
       - php2
       - db
-    networks:
-      - bridge-network
 
   pma:
     image: phpmyadmin/phpmyadmin
@@ -75,10 +65,5 @@ services:
       - "8080:80"
     depends_on:
       - db
-    networks:
-      - bridge-network
 volumes:
   db_data:
-networks:
-  bridge-network:
-    driver: bridge

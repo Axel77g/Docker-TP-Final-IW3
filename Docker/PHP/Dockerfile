@@ -4,7 +4,6 @@ FROM php:fpm
 #install curl
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get install nodejs  -y 
-RUN node -v
 
 WORKDIR /usr/composer/
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
